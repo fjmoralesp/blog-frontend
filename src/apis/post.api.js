@@ -1,8 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
-const token = window.localStorage.getItem('token');
-
 export const createPost = async (post) => {
+    const token = window.localStorage.getItem('token');
     const { title, body } = post;
     const response = await fetch('http://localhost:3001/posts', {
         method: 'POST',
@@ -21,6 +20,7 @@ export const createPost = async (post) => {
 }
 
 const fetchPosts = async () => {
+    const token = window.localStorage.getItem('token');
     const response = await fetch('http://localhost:3001/posts', {
         headers: {
             Authorization: `Bearer ${token}`,
