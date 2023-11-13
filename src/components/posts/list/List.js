@@ -3,6 +3,7 @@ import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/mate
 import { deletePost, updatePost, usePosts } from '../../../apis/posts.api';
 import { useUser } from '../../../apis/users.api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import Comments from '../../comments/Comments';
 
 function List() {
     const queryClient = useQueryClient();
@@ -121,6 +122,12 @@ function List() {
                                 </Button>
                             </Box>
                         )}
+                        <Typography sx={{ mb: 1.5 }} color="text.secondary">
+                            Comments
+                        </Typography>
+                        <Box>
+                            <Comments comments={post.Comments} postId={post.id} />
+                        </Box>
                     </CardContent>
                 </Card>
             ))}
