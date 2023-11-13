@@ -1,10 +1,12 @@
 import React from 'react';
+import Auth from './components/auth/Auth';
+import { Container } from '@mui/material';
 
 function App() {
   return (
-    <div>
-      hello world
-    </div>
+      <Container>
+          <Auth />
+      </Container>
   );
 }
 
