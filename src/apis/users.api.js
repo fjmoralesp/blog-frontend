@@ -1,12 +1,20 @@
 import { configureAuth } from 'react-query-auth';
 
-const loadUser = async (username) => {
-    const response = await fetch(`http://localhost:3001/users?username=${username}`);
-    if (!response.ok) {
-        throw new Error('Cannot load user');
+const loadUser = async () => {
+    const token = window.localStorage.getItem('token');
+    const response = await fetch(`http://localhost:3001/users/me`, {
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    if (!response.ok || response.status === 403) {
+        return null;
     }
 
-    return await response.json();
+    const data = await response.json();
+
+    return data.data;
 }
 
 const login = async (data) => {
@@ -22,6 +30,7 @@ const login = async (data) => {
     }
 
     const apiResponse = await response.json();
+    window.localStorage.setItem('token', apiResponse.data.token);
     return apiResponse.data;
 }
 
@@ -37,14 +46,14 @@ const signUp = async (data) => {
         throw new Error('Cannot sign up');
     }
 
-    return await response.json();
+    return await login(data);
 }
 
-const logout = () => {
-    console.log('logout');
+const logout = async () => {
+    window.localStorage.removeItem('token');
 }
 
-export const { useUser, useLogin, useRegister, useLogout } = configureAuth({
+export const { useUser, useLogin, useRegister, useLogout, AuthLoader } = configureAuth({
     userFn: loadUser,
     loginFn: login,
     registerFn: signUp,

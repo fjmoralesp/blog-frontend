@@ -11,11 +11,7 @@ function Auth() {
         setForm(form);
     }
 
-    const onSuccessSignUp = () => {
-        setForm(FORMS.LOGIN);
-    }
-
-    const onSuccessLogin = () => {
+    const onSuccess = () => {
         setForm(null);
     }
 
@@ -26,8 +22,8 @@ function Auth() {
     return (
         <>
             <Navbar onChange={handleFormChange} onLogout={onLogout} />
-            {form === FORMS.SIGN_UP && <SignUp onSuccess={onSuccessSignUp} />}
-            {form === FORMS.LOGIN && <Login onSuccess={onSuccessLogin} />}
+            {form === FORMS.SIGN_UP && <SignUp onSuccess={onSuccess} />}
+            {form === FORMS.LOGIN && <Login onSuccess={onSuccess} />}
         </>
     );
 }
