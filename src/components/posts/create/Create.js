@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Box, Button, TextField, Typography } from '@mui/material';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { createPost } from '../../../apis/post.api';
+import { createPost } from '../../../apis/posts.api';
 
 function Create() {
     const queryClient = useQueryClient();

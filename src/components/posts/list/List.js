@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material';
-import {deletePost, updatePost, usePosts} from '../../../apis/post.api';
+import { deletePost, updatePost, usePosts } from '../../../apis/posts.api';
 import { useUser } from '../../../apis/users.api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
