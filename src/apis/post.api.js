@@ -38,6 +38,23 @@ export const updatePost = async (post) => {
     return await response.json();
 }
 
+export const deletePost = async (post) => {
+    const token = window.localStorage.getItem('token');
+    const { id } = post;
+    const response = await fetch(`http://localhost:3001/posts?postId=${id}`, {
+        method: 'DELETE',
+        headers: {
+            Authorization: `Bearer ${token}`,
+        },
+    });
+
+    if (!response.ok) {
+        throw new Error('Cannot delete post');
+    }
+
+    return await response.json();
+}
+
 const fetchPosts = async () => {
     const token = window.localStorage.getItem('token');
     const response = await fetch('http://localhost:3001/posts', {

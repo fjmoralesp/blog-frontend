@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Box, Button, Card, CardContent, TextField, Typography } from '@mui/material';
-import { updatePost, usePosts } from '../../../apis/post.api';
+import {deletePost, updatePost, usePosts} from '../../../apis/post.api';
 import { useUser } from '../../../apis/users.api';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -13,8 +13,16 @@ function List() {
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
 
-    const mutation = useMutation({
+    const mutationUpdate = useMutation({
         mutationFn: updatePost,
+        onSuccess: () => {
+            setEditingId(null);
+            queryClient.invalidateQueries({ queryKey: ['posts'] });
+        },
+    });
+
+    const mutationDelete = useMutation({
+        mutationFn: deletePost,
         onSuccess: () => {
             setEditingId(null);
             queryClient.invalidateQueries({ queryKey: ['posts'] });
@@ -27,6 +35,10 @@ function List() {
         setBody(post.body);
     }
 
+    const handleDelete = (post) => {
+        mutationDelete.mutate({ id: post.id });
+    }
+
     const handleTitleChange = (event) => {
         setTitle(event.target.value);
     };
@@ -36,7 +48,7 @@ function List() {
     }
 
     const handlePost = (id) => {
-        mutation.mutate({ title, body, id });
+        mutationUpdate.mutate({ title, body, id });
     };
 
     const isEditing = (id) => editingId === id;
@@ -48,12 +60,21 @@ function List() {
                 <Card key={post.id}>
                     <CardContent>
                         {canEdit(post.UserId) && (
-                            <Button
-                                variant="text"
-                                onClick={() => handleEdit(post)}
-                            >
-                                Edit
-                            </Button>
+                            <>
+                                <Button
+                                    variant="text"
+                                    onClick={() => handleEdit(post)}
+                                >
+                                    Edit
+                                </Button>
+                                <Button
+                                    variant="outlined"
+                                    color="error"
+                                    onClick={() => handleDelete(post)}
+                                >
+                                    delete
+                                </Button>
+                            </>
                         )}
                         <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
                             Title
