@@ -19,6 +19,25 @@ export const createPost = async (post) => {
     return await response.json();
 }
 
+export const updatePost = async (post) => {
+    const token = window.localStorage.getItem('token');
+    const { id, title, body } = post;
+    const response = await fetch(`http://localhost:3001/posts?postId=${id}`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify({ title, body }),
+    });
+
+    if (!response.ok) {
+        throw new Error('Cannot update post');
+    }
+
+    return await response.json();
+}
+
 const fetchPosts = async () => {
     const token = window.localStorage.getItem('token');
     const response = await fetch('http://localhost:3001/posts', {
