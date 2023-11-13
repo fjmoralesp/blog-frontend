@@ -1,7 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Button, TextField, Toolbar } from '@mui/material';
+import { useRegister } from '../../../apis/users.api';
 
-function SignUp() {
+function SignUp({ onSuccess }) {
+    const register = useRegister();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleUsernameChange = (e) => {
+        setUsername(e.target.value);
+    }
+
+    const handlePasswordChange = (e) => {
+        setPassword(e.target.value);
+    }
+
+    const handleClick = () => {
+        register.mutate({ username, password }, { onSuccess: () => onSuccess() });
+    }
+
     return (
         <Box component="main" sx={{ p: 2 }}>
             <Toolbar />
@@ -18,14 +35,24 @@ function SignUp() {
                         required
                         id="username"
                         label="Username"
+                        value={username}
+                        onChange={handleUsernameChange}
                     />
                     <TextField
                         required
                         id="password"
                         label="Password"
                         type="password"
+                        value={password}
+                        onChange={handlePasswordChange}
                     />
-                    <Button variant="contained" size="large">Sign Up</Button>
+                    <Button
+                        variant="contained"
+                        size="large"
+                        onClick={handleClick}
+                    >
+                        Sign Up
+                    </Button>
                 </Box>
             </Box>
         </Box>
