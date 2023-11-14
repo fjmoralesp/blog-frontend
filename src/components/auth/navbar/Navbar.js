@@ -27,12 +27,14 @@ function Navbar({ onChange, onLogout }) {
                             renderUnauthenticated={() => (
                                 <>
                                     <Button
+                                        data-testid="sign-up-button"
                                         sx={{ color: '#fff' }}
                                         onClick={handleSingUp}
                                     >
                                         Sign Up
                                     </Button>
                                     <Button
+                                        data-testid="login-button"
                                         sx={{ color: '#fff' }}
                                         onClick={handleLogin}
                                     >
@@ -42,6 +44,7 @@ function Navbar({ onChange, onLogout }) {
                             )}
                         >
                             <Button
+                                data-testid="logout-button"
                                 sx={{ color: '#fff' }}
                                 onClick={handleLogout}
                             >

@@ -47,6 +47,7 @@ function SignUp({ onSuccess }) {
                         onChange={handlePasswordChange}
                     />
                     <Button
+                        data-testid="submit-sign-up-button"
                         variant="contained"
                         size="large"
                         onClick={handleClick}

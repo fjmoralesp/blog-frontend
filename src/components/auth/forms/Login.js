@@ -47,6 +47,7 @@ function Login({ onSuccess }) {
                         onChange={handlePasswordChange}
                     />
                     <Button
+                        data-testid="submit-login-button"
                         variant="contained"
                         size="large"
                         onClick={handleClick}
