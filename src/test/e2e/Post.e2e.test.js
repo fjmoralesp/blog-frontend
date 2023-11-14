@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer';
-import { getRandomString } from '../../util/randomString';
+import { getRandomString } from '../util/randomString';
 
 describe('Post', () => {
     let browser;
@@ -27,6 +27,7 @@ describe('Post', () => {
         await page.type('#body', 'some body');
         await page.click('[data-testid="submit-post-button"]');
 
+        await page.waitForTimeout(1000);
         const postTitle = await page.$x('(//div[contains(string(), "some title")])[last()]');
         const text = await page.evaluate(el => el.textContent, postTitle[0]);
         expect(text).toContain('some title');
@@ -46,6 +47,7 @@ describe('Post', () => {
         await page.type('#body-edit', ' edited');
         await page.click('[data-testid="submit-edit-post-button"]');
 
+        await page.waitForTimeout(1000);
         const postTitle = await page.$x('(//div[contains(string(), "some title edited")])[last()]');
         const text = await page.evaluate(el => el.textContent, postTitle[0]);
         expect(text).toContain('some title edited');

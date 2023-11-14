@@ -53,17 +53,19 @@ function Comment({ comment }) {
                 {canEdit(comment.User.id) && (
                     <>
                         <Button
+                            data-testid="edit-comment-button"
                             variant="text"
                             onClick={() => handleEdit(comment)}
                         >
                             Edit
                         </Button>
                         <Button
+                            data-testid="delete-comment-button"
                             variant="outlined"
                             color="error"
                             onClick={() => handleDelete(comment)}
                         >
-                            delete
+                            Delete comment
                         </Button>
                     </>
                 )}
@@ -79,7 +81,7 @@ function Comment({ comment }) {
                 {isEditing(comment.id) ? (
                     <TextField
                         required
-                        id="body"
+                        id="body-comment-edit"
                         label="body"
                         multiline
                         rows={4}
@@ -94,6 +96,7 @@ function Comment({ comment }) {
                 {isEditing(comment.id) && (
                     <Box sx={{ p: 1 }}>
                         <Button
+                            data-testid="submit-edit-comment-button"
                             variant="contained"
                             size="large"
                             onClick={() => handleComment(comment.id)}

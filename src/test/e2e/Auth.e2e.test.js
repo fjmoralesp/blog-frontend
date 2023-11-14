@@ -1,5 +1,5 @@
 import puppeteer from 'puppeteer';
-import { getRandomString } from '../../util/randomString';
+import { getRandomString } from '../util/randomString';
 
 describe('Auth', () => {
     let browser;

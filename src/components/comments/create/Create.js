@@ -42,7 +42,7 @@ function Create({ postId }) {
                 <Box sx={{ width: 1 }}>
                     <TextField
                         required
-                        id="body"
+                        id="body-comment"
                         label="body"
                         multiline
                         rows={4}
@@ -51,6 +51,7 @@ function Create({ postId }) {
                     />
                 </Box>
                 <Button
+                    data-testid="submit-comment-button"
                     variant="contained"
                     size="large"
                     onClick={handleComment}
