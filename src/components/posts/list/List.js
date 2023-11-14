@@ -63,12 +63,14 @@ function List() {
                         {canEdit(post.UserId) && (
                             <>
                                 <Button
+                                    data-testid="edit-post-button"
                                     variant="text"
                                     onClick={() => handleEdit(post)}
                                 >
                                     Edit
                                 </Button>
                                 <Button
+                                    data-testid="delete-post-button"
                                     variant="outlined"
                                     color="error"
                                     onClick={() => handleDelete(post)}
@@ -83,7 +85,7 @@ function List() {
                         {isEditing(post.id) ? (
                             <TextField
                                 required
-                                id="title"
+                                id="title-edit"
                                 label="title"
                                 value={title}
                                 onChange={handleTitleChange}
@@ -99,7 +101,7 @@ function List() {
                         {isEditing(post.id) ? (
                             <TextField
                                 required
-                                id="body"
+                                id="body-edit"
                                 label="body"
                                 multiline
                                 rows={4}
@@ -114,6 +116,7 @@ function List() {
                         {isEditing(post.id) && (
                             <Box sx={{ p: 1 }}>
                                 <Button
+                                    data-testid="submit-edit-post-button"
                                     variant="contained"
                                     size="large"
                                     onClick={() => handlePost(post.id)}

@@ -68,6 +68,7 @@ function Create() {
                     </Box>
                     <Box sx={{ display: 'flex', justifyContent: 'center' }}>
                         <Button
+                            data-testid="submit-post-button"
                             variant="contained"
                             size="large"
                             onClick={handlePost}
